@@ -5,5 +5,7 @@
   $dbUser = "rifqah";//aljubour
   $dbPassword = "rifqah1234";//Xtmvm2qw  student: Renyhoky
   $root = "/var/www/rifqah/";
+  $adminLogin = "admin";
+  $adminPassword = "admin1234";
 
 ?>
