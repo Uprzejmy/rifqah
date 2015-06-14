@@ -5,5 +5,35 @@
   <body>
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
+    <?php 
+
+      session_start();
+
+      if(isset($_SESSION['key']) && $_SESSION['key'] != "")//if user is already logged in let him logout manually first
+      {
+        echo('Jestes juz zalogowany jako: '.$_SESSION['name'].' '.$_SESSION['surname'].' '.$_SESSION['email']);
+        echo('<form action="logout_submit.php" method="POST">
+                <input type="submit" value="Wyloguj"/>
+              </form>');
+      }
+      else
+      {    
+        if(isset($_SESSION['registration_error']))//if there was any error during login show appropriate message
+        {
+          echo($_SESSION['registration_error']);
+          $_SESSION = array();
+        }  
+
+        //display login form
+        echo('<form action="register_submit.php" method="POST">
+                email: <input type="text" name="email"/><br/>
+                password: <input type="password" name="password"/><br/>
+                repeat password: <input type="password" name="password2"/><br/>
+                name: <input type="name" name="name"/><br/>
+                surname: <input type="surname" name="surname"/><br/>
+                <input type="submit" value="Zarejestruj"/>
+              </form>');
+      }
+    ?>
   </body>
 </html>

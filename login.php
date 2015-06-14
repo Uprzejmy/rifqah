@@ -16,13 +16,12 @@
                 <input type="submit" value="Wyloguj"/>
               </form>');
       }
-
       else
       {    
         if(isset($_SESSION['login_error']))//if there was any error during login show appropriate message
         {
           echo($_SESSION['login_error']);
-          unset($_SESSION['login_error']);
+          $_SESSION = array();
         }  
 
         //display login form
