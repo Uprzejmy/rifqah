@@ -20,6 +20,14 @@
 
   $row = mysql_fetch_assoc($result);
 
+  //check if user with submitted email exists
+  if(!isset($row['id']))
+  {
+    $_SESSION = array();
+    $_SESSION['login_error'] = "Nie ma takiego użytkownika";
+    header('Location: ' . 'login.php');
+    die();
+  }
 
   //if there is wrong password submitted fill the message and redirect to login page
   if($_POST['password'] != $row['password'])
