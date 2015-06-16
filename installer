@@ -1,0 +1,4 @@
+#!/bin/bash
+
+php install/prepareDB.php
+php install/addAdmin.php
