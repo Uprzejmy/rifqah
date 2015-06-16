@@ -31,7 +31,10 @@
                 repeat password: <input type="password" name="password2"/><br/>
                 name: <input type="name" name="name"/><br/>
                 surname: <input type="surname" name="surname"/><br/>
-                <input type="submit" value="Zarejestruj"/>
+                register as: 
+                <input type="radio" name="role" value="patient" checked>Patient
+                <input type="radio" name="role" value="doctor">Doctor
+                <input type="submit" value="Register"/>
               </form>');
       }
     ?>

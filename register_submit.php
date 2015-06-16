@@ -48,25 +48,35 @@
   }
   
   //everything is ok, user submitted valid data register him, log him in and redirect to homepage
-  $query = "INSERT INTO users (email, password, name, surname) VALUES ('".$_POST['email']."', '".$_POST['password']."', '".$_POST['name']."', '".$_POST['surname']."')";
-
-  echo($query);
-
+  $query = "INSERT INTO users (email, password, name, surname) VALUES ('".$_POST['email']."', '".md5($_POST['password'])."', '".$_POST['name']."', '".$_POST['surname']."')";
   $result = mysql_query($query)
     or die("Can't register the user");
 
   //not the perfect code, just to get id of new user to log him in
   $query = "SELECT id FROM users WHERE email = \"".$_POST['email']."\"";
-
   $result = mysql_query($query)
     or die("Can't get user info");
-
   $row = mysql_fetch_assoc($result);
 
+  if($_POST['role'] == "doctor")
+  {
+    //Create query to insert Patient data into database
+    $query = "INSERT INTO doctors (user_id) VALUES (".$row['id'].")";
+  }
+  else
+  {
+    //Create query to insert Doctor data into database
+    $query = "INSERT INTO patients (user_id) VALUES (".$row['id'].")";
+  }
+  //execute role query
+  mysql_query($query)
+    or die("Can't get user info");
+
+  //set session data - log user in
   $_SESSION['key'] = 'klucz'.$row['id'];
   $_SESSION['id'] = $row['id'];
   $_SESSION['email'] = $_POST['email'];
-  $_SESSION['password'] = $_POST['password'];
+  $_SESSION['password'] = md5($_POST['password']);
   $_SESSION['name'] = $_POST['name'];
   $_SESSION['surname'] = $_POST['surname'];
 

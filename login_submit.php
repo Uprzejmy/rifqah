@@ -30,7 +30,7 @@
   }
 
   //if there is wrong password submitted fill the message and redirect to login page
-  if($_POST['password'] != $row['password'])
+  if(md5($_POST['password']) != $row['password'])
   {
     $_SESSION = array();
     $_SESSION['login_error'] = "Niepoprawne haslo";
@@ -43,7 +43,7 @@
     $_SESSION['key'] = 'klucz'.$_POST['id'];
     $_SESSION['id'] = $_POST['id'];
     $_SESSION['email'] = $_POST['email'];
-    $_SESSION['password'] = $_POST['password'];
+    $_SESSION['password'] = $row['password'];
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['surname'] = $_POST['surname'];
 

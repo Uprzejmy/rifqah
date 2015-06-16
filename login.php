@@ -13,7 +13,7 @@
       {
         echo('Jestes juz zalogowany jako: '.$_SESSION['name'].' '.$_SESSION['surname'].' '.$_SESSION['email']);
         echo('<form action="logout_submit.php" method="POST">
-                <input type="submit" value="Wyloguj"/>
+                <input type="submit" value="Log out"/>
               </form>');
       }
       else
@@ -28,7 +28,7 @@
         echo('<form action="login_submit.php" method="POST">
                 email: <input type="text" name="email"/><br/>
                 password: <input type="password" name="password"/><br/>
-                <input type="submit" value="Zaloguj"/>
+                <input type="submit" value="Log in"/>
               </form>');
       }
     ?>
