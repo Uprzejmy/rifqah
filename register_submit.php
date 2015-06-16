@@ -17,7 +17,7 @@
     ($_POST['surname'] == ""))
   {
     $_SESSION = array();
-    $_SESSION['registration_error'] = "Brakuje danych";
+    $_SESSION['registration_error'] = "Fields are empty";
     header('Location: ' . 'register.php');//simply redirect user to another page
     die();
   }
@@ -33,7 +33,7 @@
   if($row['id'])
   {
     $_SESSION = array();
-    $_SESSION['registration_error'] = "Adres email jest zajęty";
+    $_SESSION['registration_error'] = "Email already in use";
     header('Location: ' . 'register.php');
     die();
   }
@@ -42,7 +42,7 @@
   if($_POST['password'] != $_POST['password2'])
   {
     $_SESSION = array();
-    $_SESSION['registration_error'] = "Podane hasła się nie zgadzają";
+    $_SESSION['registration_error'] = "Passwords don't match";
     header('Location: ' . 'register.php');
     die();
   }

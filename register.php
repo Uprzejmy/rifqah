@@ -34,7 +34,7 @@
                 register as: 
                 <input type="radio" name="role" value="patient" checked>Patient
                 <input type="radio" name="role" value="doctor">Doctor
-                <input type="submit" value="Registe"r/>
+                <input type="submit" value="Register"/>
               </form>');
       }
     ?>

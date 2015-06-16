@@ -8,7 +8,7 @@
   if(!isset($_POST['email']) || ($_POST['email'] == "") || (!isset($_POST['password'])) || ($_POST['password'] == ""))
   {
     $_SESSION = array();
-    $_SESSION['login_error'] = "Brak danych";
+    $_SESSION['login_error'] = "Fields are empty";
     header('Location: ' . 'login.php');//simply redirect user to another page
     die();
   }
@@ -24,7 +24,7 @@
   if(!isset($row['id']))
   {
     $_SESSION = array();
-    $_SESSION['login_error'] = "Nie ma takiego użytkownika";
+    $_SESSION['login_error'] = "There is no user with ".$_POST['email']." login";
     header('Location: ' . 'login.php');
     die();
   }
@@ -33,7 +33,7 @@
   if(md5($_POST['password']) != $row['password'])
   {
     $_SESSION = array();
-    $_SESSION['login_error'] = "Niepoprawne haslo";
+    $_SESSION['login_error'] = "Password is not correct";
     header('Location: ' . 'login.php');
     die();
   }
