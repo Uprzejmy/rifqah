@@ -20,10 +20,11 @@
   (
     'CREATE TABLE users (
       id INT AUTO_INCREMENT NOT NULL,
-      email VARCHAR(255) NOT NULL, 
-      password VARCHAR(255) NOT NULL, 
-      surname VARCHAR(255) NOT NULL,
-      name VARCHAR(255) NOT NULL,
+      email VARCHAR(127) NOT NULL, 
+      password VARCHAR(127) NOT NULL, 
+      surname VARCHAR(127) NOT NULL,
+      name VARCHAR(127) NOT NULL,
+      session_key VARCHAR(127),
       PRIMARY KEY(id),
       UNIQUE KEY email (email)     
     ) 
@@ -70,7 +71,7 @@
 
     'CREATE TABLE buildings (
       id INT AUTO_INCREMENT NOT NULL,
-      name VARCHAR(255) NOT NULL,
+      name VARCHAR(127) NOT NULL,
       PRIMARY KEY(id)
     )
 
@@ -81,7 +82,7 @@
     'CREATE TABLE surgeries (
       id INT AUTO_INCREMENT NOT NULL,
       building_id INT NOT NULL,
-      name VARCHAR(255) NOT NULL,
+      name VARCHAR(127) NOT NULL,
       PRIMARY KEY(id),
       CONSTRAINT sugeries_building_id FOREIGN KEY (building_id) REFERENCES buildings (id)
     )

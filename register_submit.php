@@ -48,7 +48,10 @@
   }
   
   //everything is ok, user submitted valid data register him, log him in and redirect to homepage
-  $query = "INSERT INTO users (email, password, name, surname) VALUES ('".$_POST['email']."', '".md5($_POST['password'])."', '".$_POST['name']."', '".$_POST['surname']."')";
+  $date = new DateTime();
+  $session_key = md5($_POST['email'].$date->getTimestamp());
+
+  $query = "INSERT INTO users (email, password, name, surname, session_key) VALUES ('".$_POST['email']."', '".md5($_POST['password'])."', '".$_POST['name']."', '".$_POST['surname']."', '".$session_key."')";
   $result = mysql_query($query)
     or die("Can't register the user");
 
@@ -73,7 +76,7 @@
     or die("Can't get user info");
 
   //set session data - log user in
-  $_SESSION['key'] = 'klucz'.$row['id'];
+  $_SESSION['session_key'] = $session_key;
   $_SESSION['id'] = $row['id'];
   $_SESSION['email'] = $_POST['email'];
   $_SESSION['password'] = md5($_POST['password']);

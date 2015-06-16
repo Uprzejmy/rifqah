@@ -39,13 +39,21 @@
   }
   else
   {
+    $date = new DateTime();
+    $session_key = md5($_POST['email'].$date->getTimestamp());
+    //everything is ok, user submitted valid data create new session_key, log him in and redirect to homepage
+    $query = "UPDATE users SET session_key='".$session_key."' WHERE id='".$row['id']."'";
+    echo($query);
+    $result = mysql_query($query)
+    or die("Can't register the user");
+
     //everything is ok, user's data exists so let him log in and redirect to homepage
-    $_SESSION['key'] = 'klucz'.$_POST['id'];
-    $_SESSION['id'] = $_POST['id'];
+    $_SESSION['session_key'] = $session_key;
+    $_SESSION['id'] = $row['id'];
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['password'] = $row['password'];
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['surname'] = $_POST['surname'];
+    $_SESSION['name'] = $row['name'];
+    $_SESSION['surname'] = $row['surname'];
 
     header('Location: ' . 'index.php');
     die();

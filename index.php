@@ -9,7 +9,7 @@
       session_start();
 
       //if user is logged in print the info
-      if(isset($_SESSION['key']) && $_SESSION['key'] != "")
+      if(isset($_SESSION['session_key']) && $_SESSION['session_key'] != "")
         echo("Jestes zalogowany jako: ".$_SESSION['email']);
     ?>
   </body>
