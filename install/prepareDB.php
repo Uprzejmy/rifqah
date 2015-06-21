@@ -84,7 +84,23 @@
       building_id INT NOT NULL,
       name VARCHAR(127) NOT NULL,
       PRIMARY KEY(id),
-      CONSTRAINT sugeries_building_id FOREIGN KEY (building_id) REFERENCES buildings (id)
+      CONSTRAINT surgeries_building_id FOREIGN KEY (building_id) REFERENCES buildings (id)
+    )
+
+    DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci 
+    ENGINE = InnoDB    
+    ',
+
+    'CREATE TABLE agreements (
+      id INT AUTO_INCREMENT NOT NULL,
+      surgery_id INT NOT NULL,
+      doctor_id INT NOT NULL,
+      day INT NOT NULL,
+      time_start INT NOT NULL,
+      time_end INT NOT NULL,
+      PRIMARY KEY(id),
+      CONSTRAINT agreements_surgery_id FOREIGN KEY (surgery_id) REFERENCES surgeries (id),
+      CONSTRAINT agreements_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (id)
     )
 
     DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci 
