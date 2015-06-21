@@ -49,7 +49,6 @@
   }
 
   //check if doctor with submitted email exists
-
   $query = "SELECT users.id FROM users JOIN doctors ON users.id=doctors.user_id WHERE email = \"".$_POST['doctor_email']."\"";
   $result = mysql_query($query)
     or die("Can't get user info");
@@ -62,7 +61,14 @@
     die();
   }
 
-  //zoptymalizowac zapytanie o to czy admin probuje sie dostac.
+  //check if there is 15 min space between two separated leasings
+  $query = ;//zapytanie 
+  $result = mysql_query($query)
+    or die("Can't get user info");
+
+  $row = mysql_fetch_assoc($result);
+
+  //!zoptymalizowac zapytanie o to czy admin probuje sie dostac.
 
   // if($_POST['end_hour'].$_POST['end_minute'] - )
 
