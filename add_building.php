@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Add Agreement</title>
+    <title>Add Building</title>
   </head>
   <body>
     <a href="/login.php">Login</a>
@@ -33,28 +33,9 @@
           } 
 
           //display form
-          echo("<form action='add_agreement_submit.php' method='POST'>
-                doctor's email: <input type='text' name='doctor_email'/><br/>
-                surgery: 
-                <input type='radio' name='surgery' value='internist' checked>internist
-                <input type='radio' name='surgery' value='usg'>usg
-                <input type='radio' name='surgery' value='gynecologist'>gynecologist<br/>
-                start date: 
-                <input type='date' name='start_date'/><br/>
-                end date: 
-                <input type='date' name='end_date'/><br/>
-                day: 
-                <input type='radio' name='day' value='1' checked>Monday
-                <input type='radio' name='day' value='2'>Tuesday
-                <input type='radio' name='day' value='3'>Wednesday
-                <input type='radio' name='day' value='4'>Thursday
-                <input type='radio' name='day' value='5'>Friday
-                <input type='radio' name='day' value='6'>Saturday
-                <input type='radio' name='day' value='7'>Sunday<br/>
-                start hour:
-                <input type='time' name='start_hour'/><br/>
-                end hour:
-                <input type='time' name='end_hour'/><br/>
+          echo("<form action='add_building_submit.php' method='POST'>
+                name: 
+                <input type='text' name='name'><br/>
                 <input type='submit' value='Accept'/><br/>
               </form>");
         }

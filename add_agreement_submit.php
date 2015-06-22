@@ -18,19 +18,7 @@
     die();
   }
 
-  // echo($_POST['end_hour']." ".$_POST['start_hour']);
-  // echo("<br/>");
-  // echo($_POST['end_hour']-$_POST['start_hour']);
-
-  // die();
-
   //some validation
-  // $startTimeArray = explode(":",$_POST['start_hour']);
-  // $endTimeArray = explode(":",$_POST['end_hour']);
-
-  // //$time = $hours*60+$minutes just to make comparision easier
-  // $startTime = $startTimeArray[0]*60 + $startTimeArray[1];
-  // $endTime = $_POST['end_hour']*60 + $_POST['end_minute'];
 
   //check if user's submitted start later than end
   if($_POST['start_hour'] > $_POST['end_hour'])
