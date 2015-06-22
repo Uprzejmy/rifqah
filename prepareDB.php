@@ -84,6 +84,7 @@
     'CREATE TABLE surgeries (
       id INT AUTO_INCREMENT NOT NULL,
       building_id INT NOT NULL,
+      type INT NOT NULL,
       name VARCHAR(127) NOT NULL,
       PRIMARY KEY(id),
       CONSTRAINT surgeries_building_id FOREIGN KEY (building_id) REFERENCES buildings (id)
