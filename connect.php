@@ -1,6 +1,6 @@
 <?php
 
-  include($_SERVER["DOCUMENT_ROOT"]."/config/parameters.php");
+  include("parameters.php");
 
   @mysql_connect($dbHost, $dbUser, $dbPassword)
     or die("There is no connection to MySQL server.\r\n");

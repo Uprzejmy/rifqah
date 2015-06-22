@@ -8,7 +8,7 @@
     <?php
 
       //we need to use server web path
-      include($_SERVER["DOCUMENT_ROOT"]."/config/connect.php");
+      include("connect.php");
 
       session_start();
 
@@ -44,6 +44,10 @@
                 <input type='radio' name='surgery' value='internist' checked>internist
                 <input type='radio' name='surgery' value='usg'>usg
                 <input type='radio' name='surgery' value='gynecologist'>gynecologist<br/>
+                start date: 
+                <input type='date' name='start_date'/><br/>
+                end date: 
+                <input type='date' name='end_date'/><br/>
                 day: 
                 <input type='radio' name='day' value='1' checked>Monday
                 <input type='radio' name='day' value='2'>Tuesday
@@ -52,12 +56,10 @@
                 <input type='radio' name='day' value='5'>Friday
                 <input type='radio' name='day' value='6'>Saturday
                 <input type='radio' name='day' value='7'>Sunday<br/>
-                start: 
-                <input type='text' name='start_hour'/>:
-                <input type='text' name='start_minute'/><br/>
-                end: 
-                <input type='text' name='end_hour'/>:
-                <input type='text' name='end_minute'/><br/>
+                start hour:
+                <input type='time' name='start_hour'/><br/>
+                end hour:
+                <input type='time' name='end_hour'/><br/>
                 <input type='submit' value='Accept'/><br/>
               </form>");
         }

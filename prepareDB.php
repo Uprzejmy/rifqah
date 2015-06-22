@@ -2,7 +2,9 @@
 
   //drop existing database to be sure tables doesn't exists at start
 
-  include("config/connect.php");
+  include("connect.php");
+
+  //echo("\r\n".$_SERVER["DOCUMENT_ROOT"]."/config/connect.php\r\n");
 
   $dropQuery = 'DROP DATABASE '.$dbName;
   mysql_query($dropQuery)
@@ -14,7 +16,7 @@
 
   //refresh connection and create tables
 
-  include("config/connect.php");  
+  include("connect.php");
 
   $queries = array
   (
@@ -95,9 +97,11 @@
       id INT AUTO_INCREMENT NOT NULL,
       surgery_id INT NOT NULL,
       doctor_id INT NOT NULL,
-      day INT NOT NULL,
-      time_start INT NOT NULL,
-      time_end INT NOT NULL,
+      date_start DATE NOT NULL,
+      date_end DATE NOT NULL,
+      day_num INT NOT NULL,
+      hour_start TIME NOT NULL,
+      hour_end TIME NOT NULL,
       PRIMARY KEY(id),
       CONSTRAINT agreements_surgery_id FOREIGN KEY (surgery_id) REFERENCES surgeries (id),
       CONSTRAINT agreements_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (id)

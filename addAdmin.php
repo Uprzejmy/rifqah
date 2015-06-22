@@ -1,6 +1,6 @@
 <?php
 
-  include("config/connect.php");
+  include("connect.php");
 
   //create user for admin
   $query = "INSERT INTO users (email, password, name, surname) VALUES ('admin', '".md5('admin')."', 'admin', 'admin')";
