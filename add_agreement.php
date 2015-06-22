@@ -32,14 +32,25 @@
             $_SESSION['form_error'] = "";
           } 
 
+          $query = "SELECT id, name FROM surgeries";
+          $result = mysql_query($query)
+            or die("Can't get surgeries info");
+          $surgeries = array();
+          while($row = mysql_fetch_assoc($result))
+          {
+            $surgeries[] = array($row['id'],$row['name']);
+          }
+
           //display form
-          echo("<form action='add_agreement_submit.php' method='POST'>
+          $form = "<form action='add_agreement_submit.php' method='POST'>
                 doctor's email: <input type='text' name='doctor_email'/><br/>
-                surgery: 
-                <input type='radio' name='surgery' value='internist' checked>internist
-                <input type='radio' name='surgery' value='usg'>usg
-                <input type='radio' name='surgery' value='gynecologist'>gynecologist<br/>
-                start date: 
+                surgery: <br/>";
+
+          foreach($surgeries as $surgery)
+          {
+            $form.= "<input type='radio' name='surgery' value='".$surgery[0]."'>".$surgery[1]."<br/>";
+          }
+          $form.="start date: 
                 <input type='date' name='start_date'/><br/>
                 end date: 
                 <input type='date' name='end_date'/><br/>
@@ -56,7 +67,10 @@
                 end hour:
                 <input type='time' name='end_hour'/><br/>
                 <input type='submit' value='Accept'/><br/>
-              </form>");
+              </form>";
+
+          echo($form);
+
         }
         else
           echo("You're not an admin");

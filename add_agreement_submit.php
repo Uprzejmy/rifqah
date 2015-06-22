@@ -62,6 +62,7 @@
   //check if there is 15 min space between two separated leasings
   //select all agreements with collision in dates
   $query = "SELECT id FROM agreements WHERE 
+    surgery_id=".$_POST['surgery']." AND
     date_start<'".$_POST['end_date']."' AND 
     date_end>'".$_POST['start_date']."' AND 
     day_num=".$_POST['day']." AND
@@ -80,7 +81,7 @@
 
   //data submitted was fine, insert agreement into database
   $query = "INSERT INTO agreements (surgery_id, doctor_id, date_start, date_end, day_num, hour_start, hour_end) 
-    VALUES (1,".$doctorId.",'".$_POST['start_date']."','".$_POST['end_date']."',".$_POST['day'].",'".$_POST['start_hour']."','".$_POST['end_hour']."')";
+    VALUES (".$_POST['surgery'].",".$doctorId.",'".$_POST['start_date']."','".$_POST['end_date']."',".$_POST['day'].",'".$_POST['start_hour']."','".$_POST['end_hour']."')";
   mysql_query($query)
     or die("Can't insert agreement's data");
 
