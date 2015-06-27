@@ -15,11 +15,11 @@
       {
         echo("Jestes zalogowany jako: ".$_SESSION['email']."<br/>");
         echo
-          ("
-            <a href='patient.php'>Patient</a><br/>
-            <a href='doctor.php'>Doctor</a><br/>
-            <a href='admin.php'>Admin</a><br/>
-          ");
+        ("
+          <a href='patient.php'>Patient</a><br/>
+          <a href='doctor.php'>Doctor</a><br/>
+          <a href='admin.php'>Admin</a><br/>
+        ");
       }
     ?>
   </body>

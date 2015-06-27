@@ -1,10 +1,13 @@
 <?php
 
+  //check if script has been run using console
+  if(php_sapi_name() != "cli")
+  {
+    header('Location: ' . 'index.php');
+  }
+
   //drop existing database to be sure tables doesn't exists at start
-
   include("connect.php");
-
-  //echo("\r\n".$_SERVER["DOCUMENT_ROOT"]."/config/connect.php\r\n");
 
   $dropQuery = 'DROP DATABASE '.$dbName;
   mysql_query($dropQuery)
@@ -62,6 +65,7 @@
     'CREATE TABLE doctors (
       id INT AUTO_INCREMENT NOT NULL,
       user_id INT NOT NULL,
+      specialization INT NOT NULL,
       PRIMARY KEY(id),
       UNIQUE KEY user_id (user_id),
       CONSTRAINT doctors_user_id FOREIGN KEY (user_id) REFERENCES users (id)
