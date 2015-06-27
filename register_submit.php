@@ -61,14 +61,19 @@
     or die("Can't get user info");
   $row = mysql_fetch_assoc($result);
 
-  if($_POST['role'] == "doctor")
+  if($_POST['role'] == "internist")
   {
-    //Create query to insert Patient data into database
-    $query = "INSERT INTO doctors (user_id) VALUES (".$row['id'].")";
+    //Create query to insert Doctor Internist data into database
+    $query = "INSERT INTO doctors (user_id, specialization) VALUES (".$row['id'].",0)";
+  }
+  elseif($_POST['role'] == "gynecologist")
+  {
+    //Create query to insert Doctor Gynecologist data into database
+    $query = "INSERT INTO doctors (user_id, specialization) VALUES (".$row['id'].",1)";
   }
   else
   {
-    //Create query to insert Doctor data into database
+    //Create query to insert Patient data into database
     $query = "INSERT INTO patients (user_id) VALUES (".$row['id'].")";
   }
   //execute role query

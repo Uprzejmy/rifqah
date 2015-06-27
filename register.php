@@ -34,7 +34,8 @@
                 surname: <input type="surname" name="surname"/><br/>
                 register as: 
                 <input type="radio" name="role" value="patient" checked>Patient
-                <input type="radio" name="role" value="doctor">Doctor
+                <input type="radio" name="role" value="internist">Doctor Internist
+                <input type="radio" name="role" value="gynecologist">Doctor Gynecologist
                 <input type="submit" value="Register"/>
               </form>');
       }
