@@ -56,13 +56,13 @@
                 end date: 
                 <input type='date' name='end_date'/><br/>
                 day: 
-                <input type='radio' name='day' value='1' checked>Monday
-                <input type='radio' name='day' value='2'>Tuesday
-                <input type='radio' name='day' value='3'>Wednesday
-                <input type='radio' name='day' value='4'>Thursday
-                <input type='radio' name='day' value='5'>Friday
-                <input type='radio' name='day' value='6'>Saturday
-                <input type='radio' name='day' value='7'>Sunday<br/>
+                <input type='radio' name='day' value='2' checked>Monday
+                <input type='radio' name='day' value='3'>Tuesday
+                <input type='radio' name='day' value='4'>Wednesday
+                <input type='radio' name='day' value='5'>Thursday
+                <input type='radio' name='day' value='6'>Friday
+                <input type='radio' name='day' value='7'>Saturday
+                <input type='radio' name='day' value='1'>Sunday<br/>
                 start hour:
                 <input type='time' name='start_hour'/><br/>
                 end hour:
