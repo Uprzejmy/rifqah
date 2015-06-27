@@ -6,15 +6,20 @@
   <body>
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
-    <a href="add_agreement.php">Add Agreement</a>
-    <a href="add_building.php">Add Building</a>
-    <a href="add_surgery.php">Add Surgery</a>
     <?php
-    session_start();
+      session_start();
 
       //if user is logged in print the info
       if(isset($_SESSION['session_key']) && $_SESSION['session_key'] != "")
-        echo("Jestes zalogowany jako: ".$_SESSION['email']);
+      {
+        echo("Jestes zalogowany jako: ".$_SESSION['email']."<br/>");
+        echo
+          ("
+            <a href='patient.php'>Patient</a><br/>
+            <a href='doctor.php'>Doctor</a><br/>
+            <a href='admin.php'>Admin</a><br/>
+          ");
+      }
     ?>
   </body>
 </html>
