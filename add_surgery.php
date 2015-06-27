@@ -3,11 +3,9 @@
     <title>Add Surgery</title>
   </head>
   <body>
+    <a href="index.php">Homepage</a>
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
-    <a href="add_agreement.php">Add Agreement</a>
-    <a href="add_building.php">Add Building</a>
-    <a href="add_surgery.php">Add Surgery</a>
     <?php
 
       include("connect.php");
