@@ -13,7 +13,7 @@
       //if user is logged in print the info
       if(isset($_SESSION['session_key']) && $_SESSION['session_key'] != "")
       {
-        echo("Jestes zalogowany jako: ".$_SESSION['email']."<br/>");
+        echo("You're logged in as: ".$_SESSION['email']."<br/>");
 
         include("connect.php");
 
@@ -26,6 +26,7 @@
         //check if session_key is correct for logged user
         if(isset($row['user_session_key']) && ($row['user_session_key'] == $_SESSION['session_key']))
         {
+          echo("You're an admin<br/>");
           echo
           ("
             <a href='add_agreement.php'>Add Agreement</a><br/>

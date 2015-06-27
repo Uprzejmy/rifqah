@@ -12,7 +12,7 @@
 
       if(isset($_SESSION['session_key']) && $_SESSION['session_key'] != "")//if user is already logged in let him logout manually first
       {
-        echo('Jestes juz zalogowany jako: '.$_SESSION['name'].' '.$_SESSION['surname'].' '.$_SESSION['email']);
+        echo("You're logged in as: ".$_SESSION['name'].' '.$_SESSION['surname'].' '.$_SESSION['email']);
         echo('<form action="logout_submit.php" method="POST">
                 <input type="submit" value="Wyloguj"/>
               </form>');
