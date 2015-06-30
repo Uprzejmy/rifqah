@@ -19,7 +19,7 @@
         include("connect.php");
 
         //check if logged user is a doctor
-        $query = "SELECT users.id as user_id, users.session_key as user_session_key, doctors.specialization as specialization FROM users JOIN doctors ON users.id=doctors.user_id WHERE users.id = \"".$_SESSION['id']."\"";
+        $query = "SELECT users.id as user_id, users.session_key as user_session_key, doctors.id as doctor_id, doctors.specialization as specialization FROM users JOIN doctors ON users.id=doctors.user_id WHERE users.id = \"".$_SESSION['id']."\"";
         $result = mysql_query($query)
           or die("Can't get user info");
         $row = mysql_fetch_assoc($result);
@@ -44,6 +44,8 @@
             $denidedSurgery = 1;
           }
 
+          $doctorId = $row['doctor_id'];
+
           //select all surgeries to make a radio list
           $query = "SELECT id, name FROM surgeries WHERE type<>".$denidedSurgery;
           $result = mysql_query($query)
@@ -63,6 +65,7 @@
             $form.= "<input type='radio' name='surgery' value='".$surgery[0]."'>".$surgery[1]."<br/>";
           }
           $form.="
+                <input type='hidden' name='doctor' value='".$doctorId."'>
                 date: <input type='date' name='date'/><br/>
                 start hour:
                 <input type='time' name='start_hour'/><br/>

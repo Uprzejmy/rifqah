@@ -74,7 +74,7 @@
 
   if(isset($row['id']))
   {
-    $_SESSION['form_error'] = "There is collision with another leasing";
+    $_SESSION['form_error'] = "There is time collision with another leasing";
     header('Location: ' . 'add_agreement.php');
     die();
   }
