@@ -53,7 +53,7 @@
                 Building:<br/>";
           foreach($buildings as $building)
           {
-            $form.= "<input type='radio' name='building' value='".$building[0]."'>".$building[1]."";
+            $form.= "<input type='radio' name='building' value='".$building[0]."' checked>".$building[1]."";
           }
           $form.="<br/><input type='submit' value='Accept'/><br/></form>";
                 

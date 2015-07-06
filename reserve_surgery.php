@@ -46,7 +46,7 @@
           $doctorId = $row['doctor_id'];
 
           //select all surgeries to make a radio list
-          $query = "SELECT id, name FROM surgeries WHERE type<>".$denidedSurgery;
+          $query = "SELECT id, name FROM surgeries WHERE type<>".$denidedSurgery." ORDER BY type";
           $result = mysql_query($query)
             or die("Can't get surgeries info");
           $surgeries = array();
@@ -61,7 +61,7 @@
 
           foreach($surgeries as $surgery)
           {
-            $form.= "<input type='radio' name='surgery' value='".$surgery[0]."'>".$surgery[1]."<br/>";
+            $form.= "<input type='radio' name='surgery' value='".$surgery[0]."' checked>".$surgery[1]."<br/>";
           }
           $form.="
                 <input type='hidden' name='doctor' value='".$doctorId."'>
