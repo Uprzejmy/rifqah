@@ -2,3 +2,5 @@
 
 php prepareDB.php
 php addAdmin.php
+php addDoctor.php
+php addPatient.php
