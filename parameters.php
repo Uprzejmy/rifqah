@@ -5,6 +5,8 @@
   // $dbUser = "aljubour";//aljubour
   // $dbPassword = "Xtmvm2qw";//Xtmvm2qw
 
+  //pw: Rulahuz
+
   $dbHost = "localhost";//mysql.agh.edu.pl
   $dbName = "rifqahDB";
   $dbUser = "rifqah";//aljubour

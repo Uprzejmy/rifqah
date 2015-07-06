@@ -1,6 +1,7 @@
 <?php
 
   include("connect.php");
+  include("numberToDay.php");
 
   session_start();
 
@@ -63,27 +64,45 @@
   //select all agreements with collision in dates
   $query = "SELECT id FROM agreements WHERE 
     surgery_id=".$_POST['surgery']." AND
-    date_start<'".$_POST['end_date']."' AND 
-    date_end>'".$_POST['start_date']."' AND 
-    day_num=".$_POST['day']." AND
-    hour_start>=SUBTIME('".$_POST['start_hour']."','00:15') AND
-    hour_end<=ADDTIME('".$_POST['end_hour']."','00:15')";
+    _date<='".$_POST['end_date']."' AND 
+    _date>='".$_POST['start_date']."' AND 
+    DAYOFWEEK(_date)=".$_POST['day']." AND
+    SUBTIME(hour_start,'00:15:00')<='".$_POST['end_hour']."' AND 
+    ADDTIME(hour_end,'00:15:00')>='".$_POST['start_hour']."'";
+
+  echo($query);
+  die();
   $result = mysql_query($query)
     or die("Can't get agreement info");
   $row = mysql_fetch_assoc($result);
 
-  if(isset($row['id']))
+  if($row)
   {
     $_SESSION['form_error'] = "There is time collision with another leasing";
     header('Location: ' . 'add_agreement.php');
     die();
   }
 
-  //data submitted was fine, insert agreement into database
-  $query = "INSERT INTO agreements (surgery_id, doctor_id, date_start, date_end, day_num, hour_start, hour_end) 
-    VALUES (".$_POST['surgery'].",".$doctorId.",'".$_POST['start_date']."','".$_POST['end_date']."',".$_POST['day'].",'".$_POST['start_hour']."','".$_POST['end_hour']."')";
-  mysql_query($query)
-    or die("Can't insert agreement's data");
+  //we calculate date for the first day of week when surgery is going to be leased
+  $endDate = strtotime($_POST['end_date']);
+  $day = strtotime("next ".$numberToDay[$_POST['day']], strtotime($_POST['start_date']." - 1 day"));
+  $dates = array();
+  //generate every date in specified range and with specified day of week
+  while($day<=$endDate)
+  {
+    echo(date("Y-m-d",$day));
+    $dates[] = date("Y-m-d",$day);
+    $day = strtotime("+7 days",$day);
+  }
+
+  //data submitted was fine, insert agreements into database
+  foreach($dates as $date)
+  {
+    $query = "INSERT INTO agreements (surgery_id, doctor_id, _date, hour_start, hour_end) 
+    VALUES (".$_POST['surgery'].",".$doctorId.",'".$date."','".$_POST['start_hour']."','".$_POST['end_hour']."')";
+    mysql_query($query)
+      or die("Can't insert agreement's data");
+  }
 
   //everything was fine and the data has been inserted so we can redirect
   header('Location: ' . 'add_agreement.php');

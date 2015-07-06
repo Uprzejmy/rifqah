@@ -40,14 +40,12 @@
     die();
   }
 
-  //check if surgery is available in selected time (15 min collision)
+  //check if there is agreement in selected time (15 min collision)
   $query = "SELECT id FROM agreements WHERE 
-    surgery_id = \"".$_POST['surgery']."\" AND 
-    date_start<='".$_POST['date']."' AND 
-    date_end>='".$_POST['date']."' AND 
-    day_num=DAYOFWEEK('".$_POST['date']."') AND 
-    hour_start>=SUBTIME('".$_POST['start_hour']."','00:15') AND 
-    hour_end<=ADDTIME('".$_POST['end_hour']."','00:15')";
+    surgery_id = \"".$_POST['surgery']."\" AND
+    _date='".$_POST['date']."' AND  
+    SUBTIME(hour_start,'00:15:00')<='".$_POST['end_hour']."' AND 
+    ADDTIME(hour_end,'00:15:00')>='".$_POST['start_hour']."'";
 
   $result = mysql_query($query)
     or die("Can't get surgery info");
@@ -60,9 +58,8 @@
   }
 
   //data submitted was fine, insert agreement into database
-  $query = "INSERT INTO agreements (surgery_id, doctor_id, date_start, date_end, day_num, hour_start, hour_end) 
-    VALUES (".$_POST['surgery'].",".$_POST['doctor'].",'".$_POST['date']."','".$_POST['date']."',DAYOFWEEK('".$_POST['date']."'),'".$_POST['start_hour']."','".$_POST['end_hour']."')";
-  echo $query;
+  $query = "INSERT INTO agreements (surgery_id, doctor_id, _date, hour_start, hour_end) 
+    VALUES (".$_POST['surgery'].",".$_POST['doctor'].",'".$_POST['date']."','".$_POST['start_hour']."','".$_POST['end_hour']."')";
   mysql_query($query)
     or die("Can't insert agreement's data");
 
