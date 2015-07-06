@@ -31,8 +31,12 @@
             echo
             ("
               Your specialization is Internist<br/>
-              <a href='get_available_surgeries.php?type=1'>Print internist surgeries</a>
-              <a href='get_available_surgeries.php?type=2'>Print USG surgeries</a>
+              <form action='print_available_surgeries.php' method='GET'>
+                <input type='hidden' name='specialization' value='0'>
+                date start: <input type='date' name='start_date'/><br/>
+                date end: <input type='date' name='end_date'/><br/>
+                <input type='submit' value='Print internist surgeries'/><br/>
+              </form>
             ");
           }
           else
@@ -40,10 +44,23 @@
             echo
             ("
               Your specialization is Gynecologist<br/>
-              <a href='get_available_surgeries.php?type=3'>Print gynecologist surgeries</a>
-              <a href='get_available_surgeries.php?type=2'>Print USG surgeries</a>
+              <form action='print_available_surgeries.php' method='GET'>
+                <input type='hidden' name='specialization' value='2'>
+                date start: <input type='date' name='start_date'/><br/>
+                date end: <input type='date' name='end_date'/><br/>
+                <input type='submit' value='Print gynecologist surgeries'/><br/>
+              </form>
             ");
           }
+          echo("
+            <form action='print_available_surgeries.php' method='GET'>
+              <input type='hidden' name='specialization' value='1'>
+              date start: <input type='date' name='start_date'/><br/>
+              date end: <input type='date' name='end_date'/><br/>
+              <input type='submit' value='Print USG surgeries'/><br/>
+            </form>
+          ");
+          echo("<a href='reserve_surgery.php'>Reserve Surgery</a>");
         }
         else
         {

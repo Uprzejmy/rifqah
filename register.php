@@ -14,7 +14,7 @@
       {
         echo("You're logged in as: ".$_SESSION['name'].' '.$_SESSION['surname'].' '.$_SESSION['email']);
         echo('<form action="logout_submit.php" method="POST">
-                <input type="submit" value="Wyloguj"/>
+                <input type="submit" value="Log Out"/>
               </form>');
       }
       else

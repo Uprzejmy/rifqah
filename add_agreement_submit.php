@@ -2,6 +2,7 @@
 
   include("connect.php");
   include("numberToDay.php");
+  include("dateRange.php");
 
   session_start();
 
@@ -70,8 +71,6 @@
     SUBTIME(hour_start,'00:15:00')<='".$_POST['end_hour']."' AND 
     ADDTIME(hour_end,'00:15:00')>='".$_POST['start_hour']."'";
 
-  echo($query);
-  die();
   $result = mysql_query($query)
     or die("Can't get agreement info");
   $row = mysql_fetch_assoc($result);
@@ -83,17 +82,10 @@
     die();
   }
 
-  //we calculate date for the first day of week when surgery is going to be leased
-  $endDate = strtotime($_POST['end_date']);
-  $day = strtotime("next ".$numberToDay[$_POST['day']], strtotime($_POST['start_date']." - 1 day"));
-  $dates = array();
-  //generate every date in specified range and with specified day of week
-  while($day<=$endDate)
-  {
-    echo(date("Y-m-d",$day));
-    $dates[] = date("Y-m-d",$day);
-    $day = strtotime("+7 days",$day);
-  }
+  //we should start on first day when agreement starts and weekday matches
+  $startDate = date("Y-m-d",strtotime("next ".$numberToDay[$_POST['day']], strtotime($_POST['start_date']." - 1 day")));
+  //generate every date in specified range with 7 days interval
+  $dates = date_range($startDate,$_POST['end_date'],"+7 days");
 
   //data submitted was fine, insert agreements into database
   foreach($dates as $date)
