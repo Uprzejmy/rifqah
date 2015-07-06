@@ -32,7 +32,7 @@
             ("
               Your specialization is Internist<br/>
               <form action='print_available_surgeries.php' method='GET'>
-                <input type='hidden' name='specialization' value='0'>
+                <input type='hidden' name='specialization' value='1'>
                 date start: <input type='date' name='start_date'/><br/>
                 date end: <input type='date' name='end_date'/><br/>
                 <input type='submit' value='Print internist surgeries'/><br/>
@@ -45,7 +45,7 @@
             ("
               Your specialization is Gynecologist<br/>
               <form action='print_available_surgeries.php' method='GET'>
-                <input type='hidden' name='specialization' value='2'>
+                <input type='hidden' name='specialization' value='3'>
                 date start: <input type='date' name='start_date'/><br/>
                 date end: <input type='date' name='end_date'/><br/>
                 <input type='submit' value='Print gynecologist surgeries'/><br/>
@@ -54,7 +54,7 @@
           }
           echo("
             <form action='print_available_surgeries.php' method='GET'>
-              <input type='hidden' name='specialization' value='1'>
+              <input type='hidden' name='specialization' value='2'>
               date start: <input type='date' name='start_date'/><br/>
               date end: <input type='date' name='end_date'/><br/>
               <input type='submit' value='Print USG surgeries'/><br/>

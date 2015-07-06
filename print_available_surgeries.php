@@ -28,8 +28,10 @@
         //check if session_key is correct for logged user
         if(isset($row['user_session_key']) && ($row['user_session_key'] == $_SESSION['session_key']))
         {
+
+          //maybe we shouldn't allow user to check for more than 2 weeks for example, but there is a mess with dates comparison
           //select all surgeries with specified type
-          $query = "SELECT id, name FROM surgeries WHERE type=".$_GET['specialization'];
+          $query = "SELECT surgeries.id as surgery_id, surgeries.name as surgery_name, buildings.name as building_name FROM surgeries JOIN buildings ON surgeries.building_id=buildings.id WHERE type=".$_GET['specialization'];
           $result = mysql_query($query)
             or die("Can't get surgeries info");
 
@@ -37,49 +39,53 @@
           $surgeries = array();
           while($row = mysql_fetch_assoc($result))
           {
-            $surgeries[$row['id']] = $row['name'];
+            //in the most nested array we will store agreements
+            $surgeries[$row['surgery_id']] = array('name' => "Surgery: ".$row['surgery_name']." in: ".$row['building_name']." building", 'agreements' => array());
           }
 
-          //prepare array for dates, every day has it's index
+          //prepare array for dates
           $dates = date_range($_GET['start_date'],$_GET['end_date']);
-
+          foreach($dates as $key=>$value)
+          {
+            $dates[$key] = $surgeries;
+          }
 
           // select all agreements with every information we have in specified date range
-          $query = "SELECT agreements.id as agreement_id, agreements._date as _date, agreements.hour_start as hour_start, agreements.hour_end as hour_end, 
-            surgeries.id as surgery_id, surgeries.name as surgery_name, surgeries.type as surgery_type,
-            buildings.id as building_id, buildings.name as bulding_name
-            FROM agreements 
-            JOIN surgeries ON agreements.surgery_id=surgeries.id 
-            JOIN buildings ON surgeries.building_id=buildings.id 
-            WHERE _date<='".$_GET['end_date']."' AND _date>='".$_GET['start_date']."' 
-            ORDER BY _date";
-        $result = mysql_query($query)
-          or die("Can't get agreements info");
+          $query = "SELECT agreements._date as _date, agreements.hour_start as hour_start, agreements.hour_end as hour_end, surgeries.id as surgery_id
+            FROM agreements
+            JOIN surgeries ON agreements.surgery_id=surgeries.id
+            WHERE _date<='".$_GET['end_date']."' AND _date>='".$_GET['start_date']."' AND surgeries.type=".$_GET['specialization']."
+            ORDER BY _date, hour_start";
 
+          $result = mysql_query($query)
+            or die("Can't get agreements info");
 
-          echo("<br/>");
-          echo($query);
-          echo("<br/>");
-
-          echo("You're a doctor<br/>");
-          if($_GET['specialization'] == 0)
+          while($row = mysql_fetch_assoc($result))
           {
-            echo
-            ("
-              Your specialization is Internist<br/>
-              <a href='get_available_surgeries/1'>Print internist surgeries</a>
-              <a href='get_available_surgeries/2'>Print USG surgeries</a>
-            ");
+            $dates[$row['_date']][$row['surgery_id']]['agreements'][] = array('hour_start' => $row['hour_start'],'hour_end' => $row['hour_end']);
           }
-          else
+
+          echo("Every surgery is available from 7:00 to 21:00, there must be at least 15 mnute break between two separate leasings<br/>");
+          //print the data
+          foreach($dates as $key => $date)
           {
-            echo
-            ("
-              Your specialization is Gynecologist<br/>
-              <a href='get_available_surgeries/3'>Print gynecologist surgeries</a>
-              <a href='get_available_surgeries/2'>Print USG surgeries</a>
-            ");
+            echo($key.":<br/>");
+            foreach($date as $surgery)
+            {
+              echo("*".$surgery['name'].":<br/>");
+              foreach($surgery['agreements'] as $agreement)
+              {
+                echo("**reserved from: ".$agreement['hour_start']." to: ".$agreement['hour_end']."<br/>");
+              }
+              echo("<br/>");
+            }
+            echo("<br/>");
           }
+
+          //uncomment these line to reveal the structure
+          // echo("<pre>");
+          // print_r($dates);
+          // echo("<pre>");
         }
         else
         {
